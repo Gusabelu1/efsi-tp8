@@ -1,17 +1,20 @@
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import CustomNavbar from './components/CustomNavbar';
 import CustomCarousel from './components/CustomCarousel';
+import productosContext from './contexts/productosContext.js';
 
 export const productsContext = React.createContext();
 
 function App() {
-
+  const [productos, setProductos] = useState()
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products`)
     .then(res => res.json())
     .then(res => {
-        setProducts(res.products)
+      setProductos(res.products)
+      console.log(res.products)
     })
     .catch(err => console.error(err));
   }, []);
@@ -21,9 +24,15 @@ function App() {
       <header>
         <CustomNavbar />
       </header>
-      <section>
-        <CustomCarousel />
-      </section>
+      <productosContext.Provider value={{ productos, setProductos }}>
+        { productos ?
+          <section>
+            <CustomCarousel />
+          </section>
+        :
+          null
+        }
+      </productosContext.Provider>
     </div>
   );
 }
