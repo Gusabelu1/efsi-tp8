@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import './App.css';
-import CustomNavbar from './components/CustomNavbar';
-import CustomCarousel from './components/CustomCarousel';
-import productosContext from './contexts/productosContext.js';
-
-export const productsContext = React.createContext();
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Producto from './components/Producto';
+import productosContext from './contexts/productosContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './views/Home';
 
 function App() {
   const [productos, setProductos] = useState()
@@ -14,26 +13,19 @@ function App() {
     .then(res => res.json())
     .then(res => {
       setProductos(res.products)
-      console.log(res.products)
     })
     .catch(err => console.error(err));
   }, []);
 
   return (
-    <div>
-      <header>
-        <CustomNavbar />
-      </header>
-      <productosContext.Provider value={{ productos, setProductos }}>
-        { productos ?
-          <section>
-            <CustomCarousel />
-          </section>
-        :
-          null
-        }
-      </productosContext.Provider>
-    </div>
+    <productosContext.Provider value={{ productos, setProductos }}>
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/" element={<Home />}/>
+          <Route path="/producto/:id" element={<Producto />}/>
+        </Routes>
+      </BrowserRouter>
+    </productosContext.Provider>
   );
 }
 
