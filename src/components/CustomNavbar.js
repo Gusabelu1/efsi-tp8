@@ -11,10 +11,13 @@ function CustomNavbar() {
                         <a href="/home" className='nav-link'>INICIO</a>
                     </Navbar.Text>
                     <Navbar.Text className='me-2'>
-                        <a href="/productos " className='nav-link'>PRODUCTOS</a>
+                        <a href="/about" className='nav-link'>QUIENES SOMOS</a>
                     </Navbar.Text>
                     <Navbar.Text className='me-2'>
-                        <a href="/" className='nav-link'>CONTACTO</a>
+                        <a href="/productos" className='nav-link'>PRODUCTOS</a>
+                    </Navbar.Text>
+                    <Navbar.Text className='me-2'>
+                        <a href="/contacto" className='nav-link'>CONTACTO</a>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>

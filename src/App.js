@@ -7,6 +7,8 @@ import Home from './views/Home';
 import Navbar from './components/CustomNavbar';
 import Footer from './components/Footer';
 import Productos from './components/Productos';
+import Sobre from './components/Sobre';
+import Contacto from './components/Contacto';
 
 function App() {
   const [productos, setProductos] = useState()
@@ -29,8 +31,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route index path="/home" element={<Home />}/>
-            <Route path="/producto/:id" element={<Producto />}/>
+            <Route index path="/about" element={<Sobre />}/>
             <Route path="/productos" element={<Productos />}/>
+            <Route path="/contacto" element={<Contacto />}/>
+            <Route path="/producto/:id" element={<Producto />}/>
           </Routes>
         </BrowserRouter>
       </productosContext.Provider>
