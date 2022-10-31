@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { Container, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import productosContext from '../contexts/productosContext.js';
-import CustomNavbar from "./CustomNavbar.js";
-import Footer from "./Footer.js";
 
 function Producto() {
     const { productos } = useContext(productosContext);
@@ -13,7 +11,6 @@ function Producto() {
 
     return (
         <>
-            <CustomNavbar />
             { producto && (
                 <Container className="d-flex justify-content-center mt-5">
                     <Card>
@@ -29,7 +26,6 @@ function Producto() {
                     </Card>
                 </Container>
             )}
-            <Footer />
         </>
     );
 }
