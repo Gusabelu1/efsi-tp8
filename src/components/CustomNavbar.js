@@ -19,6 +19,9 @@ function CustomNavbar() {
                     <Navbar.Text className='me-2'>
                         <a href="/contacto" className='nav-link'>CONTACTO</a>
                     </Navbar.Text>
+                    <Navbar.Text className='me-2'>
+                        <a href="/cart" className='nav-link'>CARRITO</a>
+                    </Navbar.Text>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

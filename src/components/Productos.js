@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Loading from '../components/Loading';
+import Agregar from "./Agregar";
 import productosContext from '../contexts/productosContext.js';
+import showModalContext from "../contexts/showModalContext";
 import { Card, Col, Row, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
 function Productos({ cantItems }) {
-  const { productos } = useContext(productosContext);
+    const { productos } = useContext(productosContext);
+    const { showModal, setShowModal } = useContext(showModalContext)
+    const [selectedProduct, setSelectedProduct] = useState()
 
     if (cantItems > 0) {
         productos && (productos.length = cantItems)
@@ -25,10 +29,17 @@ function Productos({ cantItems }) {
                                     <Card.Body className="d-flex flex-column">
                                         <Card.Title>{item.title}</Card.Title>
                                         <Card.Text>{item.description}</Card.Text>
-                                        <Link to={`/producto/${item.id}`} className="mt-auto"><Button className="w-100">Ver detalles</Button></Link>
+                                        <Row className="mt-auto">
+                                            <Col md="8">
+                                                <Link to={`/producto/${item.id}`}><Button className="w-100">Ver detalles</Button></Link>
+                                            </Col>
+                                            <Col>
+                                                <Button className="w-100" onClick={() => {setShowModal(true); setSelectedProduct(item)}}>Agregar</Button>
+                                            </Col>
+                                        </Row>
                                     </Card.Body>
                                     <Card.Footer>
-                                        <small className="text-muted">Rating {item.rating}/5</small>
+                                        <small className="text-muted">Rating {item.rating}/5 | ${item.price} c/u</small>
                                     </Card.Footer>
                                 </Card>
                             </Col>
@@ -38,6 +49,11 @@ function Productos({ cantItems }) {
                     <Loading />
             }
             </Row>
+            <Agregar 
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                props={selectedProduct}
+            />
         </Container>
     );
 }
