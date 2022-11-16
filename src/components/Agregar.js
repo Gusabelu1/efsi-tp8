@@ -6,6 +6,7 @@ function Agregar(props) {
     const [cant, setCant] = useState(1)
     const { carrito, setCarrito } = useContext(carritoContext);
     const prop = props.props
+    console.log(carrito)
 
     return (
         prop && (
@@ -30,9 +31,7 @@ function Agregar(props) {
                                 onClick={() => {
                                     if (cant > 1) {
                                         setCant(cant - 1)
-                                    } else {
-                                        
-                                    }             
+                                    }        
                                 }}
                             >
                                 -
@@ -43,15 +42,13 @@ function Agregar(props) {
                                 onClick={() => {
                                     if (cant < prop.stock) {
                                         setCant(cant + 1)
-                                    } else {
-                                        
-                                    }             
+                                    }         
                                 }}
                             >
                                 +
                             </Button>
                             <br></br>
-                            <Button className="mt-2" onClick={() => {setCarrito({prop, cant}); setCant(0); console.log(carrito)}}>Añadir al Carro</Button>
+                            <Button className="mt-2" onClick={() => {setCarrito([...carrito, {prop, cant}]);}} disabled={carrito.some(object => object.prop.id === prop.id)}>Añadir al Carro</Button>
                             <p>${prop.price} c/u | ${prop.price * cant}</p>
                         </Container>
                     </Container>

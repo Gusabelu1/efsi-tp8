@@ -5,33 +5,46 @@ import Loading from "../components/Loading";
 
 function Carrito() {
     const { carrito, setCarrito } = useContext(carritoContext);
-    console.log(carrito && carrito)
+    console.log(carrito)
 
     return (
         <Container>
+            <Row>
             { 
                 carrito && carrito ?
                     carrito.map(function(item) {
                         return (
-                            <Col key={item.id}>
+                            <Col key={item.prop.id} md={3}>
                                 <Card className="h-100">
-                                    <Card.Img variant="top" src={item.images[0]} style={{maxWidth: '100%', maxHeight: 150, objectFit: 'contain'}}/>
+                                    <Card.Img variant="top" src={item.prop.images[0]} style={{maxWidth: '100%', maxHeight: 150, objectFit: 'contain'}}/>
                                     <Card.Body className="d-flex flex-column">
-                                        <Card.Title>{item.title}</Card.Title>
-                                        <Card.Text>{item.description}</Card.Text>
+                                        <Card.Title>{item.prop.title}</Card.Title>
+                                        <Card.Text>{item.prop.description}</Card.Text>
+                                        <Button 
+                                            className="w-100" 
+                                            variant="danger"
+                                            onClick={() => {
+                                                const aux = carrito.filter(object => {
+                                                    return object.prop.id !== item.prop.id;
+                                                });
+                                                setCarrito(aux)
+                                                console.log(carrito)
+                                            }}
+                                        >Eliminar</Button>
                                         <Row className="mt-auto">
                                         </Row>
                                     </Card.Body>
                                     <Card.Footer>
-                                        <small className="text-muted">Rating {item.rating}/5 | ${item.price} c/u</small>
+                                        <small className="text-muted">Cantidad {item.cant} | Total ${(item.prop.price * item.cant)}</small>
                                     </Card.Footer>
                                 </Card>
                             </Col>
                         );
                     })
                 :
-                    <Loading />
+                <Loading />
             }
+            </Row>
         </Container>
     );
 }

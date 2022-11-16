@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import Loading from '../components/Loading';
 import Agregar from "./Agregar";
-import productosContext from '../contexts/productosContext.js';
+import productosContext from '../contexts/productosContext';
+import carritoContext from "../contexts/carritoContext";
 import showModalContext from "../contexts/showModalContext";
 import { Card, Col, Row, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ import { Link } from "react-router-dom";
 function Productos({ cantItems }) {
     const { productos } = useContext(productosContext);
     const { showModal, setShowModal } = useContext(showModalContext)
+    const { carrito, setCarrito } = useContext(carritoContext);
     const [selectedProduct, setSelectedProduct] = useState()
 
     if (cantItems > 0) {
@@ -34,7 +36,7 @@ function Productos({ cantItems }) {
                                                 <Link to={`/producto/${item.id}`}><Button className="w-100">Ver detalles</Button></Link>
                                             </Col>
                                             <Col>
-                                                <Button className="w-100" onClick={() => {setShowModal(true); setSelectedProduct(item)}}>Agregar</Button>
+                                                <Button className="w-100" onClick={() => {setShowModal(true); setSelectedProduct(item)}} disabled={carrito.some(object => object.prop.id === item.id)}>Agregar</Button>
                                             </Col>
                                         </Row>
                                     </Card.Body>

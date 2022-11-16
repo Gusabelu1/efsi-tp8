@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
 import Producto from './components/Producto';
 import productosContext from './contexts/productosContext';
 import showModalContext from './contexts/showModalContext';
@@ -16,7 +16,24 @@ import Carrito from './views/Carrito';
 function App() {
   const [productos, setProductos] = useState()
   const [showModal, setShowModal] = useState(false)
-  const [carrito, setCarrito] = useState()
+  const [carrito, setCarrito] = useState([
+    {
+      cant: 2,
+      prop: {
+        brand: "Samsung",
+        category: "smartphones",
+        description: "Samsung's new variant which goes beyond Galaxy to the Universe",
+        discountPercentage: 15.46,
+        id: 3,
+        images: ['https://dummyjson.com/image/i/products/3/1.jpg'],
+        price: 1249,
+        rating: 4.09,
+        stock: 36,
+        thumbnail: "https://dummyjson.com/image/i/products/3/thumbnail.jpg",
+        title: "Samsung Universe 9"
+      }
+    }
+  ])
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products`)
@@ -38,7 +55,7 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route index path="/home" element={<Home />}/>
-                <Route index path="/about" element={<Sobre />}/>
+                <Route path="/about" element={<Sobre />}/>
                 <Route path="/productos" element={<Productos />}/>
                 <Route path="/producto/:id" element={<Producto />}/>
                 <Route path="/contacto" element={<Contacto />}/>
