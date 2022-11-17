@@ -51,10 +51,10 @@ function Agregar(props) {
                             <Button 
                                 className="mt-2" 
                                 onClick={() => {
-                                    let aux = carrito.push({cant, prop});
+                                    let aux = [...carrito, {cant, prop}];
                                     setCarrito(aux);
                                     console.log(carrito)
-                                }} 
+                                }}
                                 disabled={
                                     carrito && carrito.some(object => object.prop.id === prop.id)
                                 }

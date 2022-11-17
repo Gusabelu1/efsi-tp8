@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Producto from './components/Producto';
 import productosContext from './contexts/productosContext';
 import showModalContext from './contexts/showModalContext';
@@ -16,40 +16,7 @@ import Carrito from './views/Carrito';
 function App() {
   const [productos, setProductos] = useState()
   const [showModal, setShowModal] = useState(false)
-  const [carrito, setCarrito] = useState([
-    {
-      cant: 2,
-      prop: {
-        brand: "Samsung",
-        category: "smartphones",
-        description: "Samsung's new variant which goes beyond Galaxy to the Universe",
-        discountPercentage: 15.46,
-        id: 3,
-        images: ['https://dummyjson.com/image/i/products/3/1.jpg'],
-        price: 1249,
-        rating: 4.09,
-        stock: 36,
-        thumbnail: "https://dummyjson.com/image/i/products/3/thumbnail.jpg",
-        title: "Samsung Universe 9"
-      }
-    },
-    {
-      cant: 1,
-      prop: {
-        brand: "Apple",
-        category: "smartphones",
-        description: "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-        discountPercentage: 17.94,
-        id: 2,
-        images: 'https://dummyjson.com/image/i/products/2/1.jpg',
-        price: 899,
-        rating: 4.44,
-        stock: 34,
-        thumbnail: "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
-        title: "iPhone X"
-      }
-    }
-  ])
+  const [carrito, setCarrito] = useState([])
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products`)
@@ -61,31 +28,35 @@ function App() {
   }, []);
 
   return (
-    <>
-      <header>
-        <Navbar />
-      </header>
       <productosContext.Provider value={{ productos, setProductos }}>
         <showModalContext.Provider value={{ showModal, setShowModal }}>
           <carritoContext.Provider value={{ carrito, setCarrito }}>
             <BrowserRouter>
               <Routes>
-                <Route index path="/home" element={<Home />}/>
+                <Route path='/' element={<Layout />}>
+                <Route index path="/" element={<Home />}/>
                 <Route path="/about" element={<Sobre />}/>
                 <Route path="/productos" element={<Productos />}/>
                 <Route path="/producto/:id" element={<Producto />}/>
                 <Route path="/contacto" element={<Contacto />}/>
                 <Route path="/cart" element={<Carrito />}/>
+                </Route>
               </Routes>
             </BrowserRouter>
           </carritoContext.Provider>
         </showModalContext.Provider>
       </productosContext.Provider>
-      <footer>
-        <Footer />
-      </footer>
-    </>
   );
+}
+
+const Layout = () => {
+  return (
+    <React.Fragment>
+    <header><Navbar /></header>
+    <Outlet />
+    <footer><Footer /></footer>
+    </React.Fragment>
+  )
 }
 
 export default App;

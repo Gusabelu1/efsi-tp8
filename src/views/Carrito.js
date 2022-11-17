@@ -20,19 +20,19 @@ function Carrito() {
                                     <Card.Body className="d-flex flex-column">
                                         <Card.Title>{item.prop.title}</Card.Title>
                                         <Card.Text>{item.prop.description}</Card.Text>
-                                        <Button 
-                                            className="w-100" 
-                                            variant="danger"
-                                            onClick={() => {
-                                                const aux = carrito.filter(object => {
-                                                    return object.prop.id !== item.prop.id;
-                                                });
-                                                setCarrito(aux)
-                                                console.log(carrito)
-                                            }}
-                                        >Eliminar</Button>
-                                        <Row className="mt-auto">
-                                        </Row>
+                                        <div className="mt-auto">
+                                            <Button 
+                                                className="w-100" 
+                                                variant="danger"
+                                                onClick={() => {
+                                                    const aux = carrito.filter(object => {
+                                                        return object.prop.id !== item.prop.id;
+                                                    });
+                                                    setCarrito(aux)
+                                                    console.log(carrito)
+                                                }}
+                                            >Eliminar</Button>
+                                        </div>
                                     </Card.Body>
                                     <Card.Footer>
                                         <small className="text-muted">Cantidad {item.cant} | Total ${(item.prop.price * item.cant)}</small>
