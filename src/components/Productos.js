@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 function Productos({ cantItems }) {
     const { productos } = useContext(productosContext);
     const { showModal, setShowModal } = useContext(showModalContext)
-    const { carrito, setCarrito } = useContext(carritoContext);
+    const { carrito } = useContext(carritoContext);
     const [selectedProduct, setSelectedProduct] = useState()
 
     if (cantItems > 0) {

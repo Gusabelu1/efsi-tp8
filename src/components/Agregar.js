@@ -53,6 +53,7 @@ function Agregar(props) {
                                 onClick={() => {
                                     let aux = [...carrito, {cant, prop}];
                                     setCarrito(aux);
+                                    setCant(1)
                                     console.log(carrito)
                                 }}
                                 disabled={

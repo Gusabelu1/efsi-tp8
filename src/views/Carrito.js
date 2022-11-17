@@ -5,11 +5,22 @@ import Loading from "../components/Loading";
 
 function Carrito() {
     const { carrito, setCarrito } = useContext(carritoContext);
+    let precioTotal = 0;
+    carrito.map(function(item) {
+        precioTotal += (item.prop.price * item.cant)
+        return 0;
+    })
     console.log(carrito)
 
     return (
         <Container>
-            <Row>
+            {
+                precioTotal !== 0 ?
+                    <span>TOTAL: ${precioTotal}</span>
+                :
+                    null
+            }
+            <Row className="g-4">
             { 
                 carrito && carrito ?
                     carrito.map(function(item) {
