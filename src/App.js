@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Producto from './components/Producto';
 import productosContext from './contexts/productosContext';
 import showModalContext from './contexts/showModalContext';
@@ -31,6 +31,22 @@ function App() {
         stock: 36,
         thumbnail: "https://dummyjson.com/image/i/products/3/thumbnail.jpg",
         title: "Samsung Universe 9"
+      }
+    },
+    {
+      cant: 1,
+      prop: {
+        brand: "Apple",
+        category: "smartphones",
+        description: "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+        discountPercentage: 17.94,
+        id: 2,
+        images: 'https://dummyjson.com/image/i/products/2/1.jpg',
+        price: 899,
+        rating: 4.44,
+        stock: 34,
+        thumbnail: "https://dummyjson.com/image/i/products/2/thumbnail.jpg",
+        title: "iPhone X"
       }
     }
   ])

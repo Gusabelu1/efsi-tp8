@@ -36,7 +36,16 @@ function Productos({ cantItems }) {
                                                 <Link to={`/producto/${item.id}`}><Button className="w-100">Ver detalles</Button></Link>
                                             </Col>
                                             <Col>
-                                                <Button className="w-100" onClick={() => {setShowModal(true); setSelectedProduct(item)}} disabled={carrito.some(object => object.prop.id === item.id)}>Agregar</Button>
+                                                <Button 
+                                                    className="w-100" 
+                                                    onClick={() => {
+                                                        setShowModal(true); 
+                                                        setSelectedProduct(item)
+                                                    }} 
+                                                    disabled={
+                                                        carrito.some(object => object.prop.id === item.id)
+                                                    }
+                                                >Agregar</Button>
                                             </Col>
                                         </Row>
                                     </Card.Body>

@@ -48,7 +48,17 @@ function Agregar(props) {
                                 +
                             </Button>
                             <br></br>
-                            <Button className="mt-2" onClick={() => {setCarrito([...carrito, {prop, cant}]);}} disabled={carrito.some(object => object.prop.id === prop.id)}>Añadir al Carro</Button>
+                            <Button 
+                                className="mt-2" 
+                                onClick={() => {
+                                    let aux = carrito.push({cant, prop});
+                                    setCarrito(aux);
+                                    console.log(carrito)
+                                }} 
+                                disabled={
+                                    carrito && carrito.some(object => object.prop.id === prop.id)
+                                }
+                            >Añadir al Carro</Button>
                             <p>${prop.price} c/u | ${prop.price * cant}</p>
                         </Container>
                     </Container>
